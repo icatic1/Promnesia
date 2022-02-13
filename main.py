@@ -1,20 +1,32 @@
-import pygame
-import constants as C
+import pygame, sys
+from settings import *
+from levels import Level
+import player as P
 import os
 
 
 def main():
-    background_colour = C.WHITE
-    (width, height) = (C.WIDTH, C.HEIGHT)
-    screen = pygame.display.set_mode((width, height))
+    pygame.init()
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption('Promnesia')
-    screen.fill(background_colour)
-    pygame.display.flip()
-    running = True
-    while running:
+
+    # screen.blit(P.Player, (10, 0))
+
+    clock = pygame.time.Clock()
+    # pygame.display.flip()
+    level = Level(MAP,screen)
+
+
+    while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                pygame.quit()
+                sys.exit()
+        screen.fill('black')
+        level.run()
+
+        pygame.display.update()
+        clock.tick(60)
 
 
 if __name__ == "__main__":
