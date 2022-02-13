@@ -5,7 +5,7 @@ MAP = [
     "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
     "                             X",
     "                             X",
-    "                             X",
+    "           P                 X",
     "         XXXX                X",
     "                XXXXX        X",
     "      XX                     X",

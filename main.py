@@ -1,7 +1,6 @@
 import pygame, sys
 from settings import *
 from levels import Level
-import player as P
 import os
 
 

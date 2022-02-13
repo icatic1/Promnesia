@@ -7,3 +7,7 @@ class Block(pygame.sprite.Sprite):
         self.image = pygame.Surface((size, size))
         self.image.fill('grey')
         self.rect = self.image.get_rect(topleft=pos)
+
+    # kamera
+    def update(self, shift):
+        self.rect.x+=shift
