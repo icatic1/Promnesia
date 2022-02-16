@@ -1,7 +1,7 @@
 import pygame
 from blocks import Block
 from player import Player
-from settings import BLOCK_SIZE
+from settings import BLOCK_SIZE,WIDTH
 
 
 class Level:
@@ -24,10 +24,27 @@ class Level:
                     p = Player((col_index * BLOCK_SIZE, row_index * BLOCK_SIZE))
                     self.player.add(p)
 
+    def scroll_x(self):
+        player = self.player.sprite
+        player_pos = player.rect.centerx
+        vector_dir = player.direction.x
+
+        if player_pos < WIDTH/4 and vector_dir < 0:
+            self.world_shift = 4
+            player.player_speed = 0
+        elif player_pos > WIDTH - WIDTH/4 and vector_dir > 0:
+            self.world_shift = -4
+            player.player_speed = 0
+        else:
+            self.world_shift = 0
+            player.player_speed = 4
+
     def run(self):
         # crtam platforme
         self.blocks.update(self.world_shift)
         self.blocks.draw(self.display_surface)
 
         # crtam igraca
+        self.player.update()
         self.player.draw(self.display_surface)
+        self.scroll_x()

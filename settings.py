@@ -11,6 +11,8 @@ MAP = [
     "      XX                     X",
     "                             X",
     "                             X",
+    "                             X",
+    "                             X",
     "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 ]
 BLOCK_SIZE=64
