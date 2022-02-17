@@ -39,12 +39,39 @@ class Level:
             self.world_shift = 0
             player.player_speed = 4
 
+    def horizontal_collision(self):
+        player = self.player.sprite
+        player.rect.x += player.direction.x * player.player_speed
+
+        for s in self.blocks.sprites():
+            if s.rect.colliderect(player.rect):
+                if player.direction.x < 0:
+                    player.rect.left = s.rect.right
+                elif player.direction.x > 0:
+                    player.rect.right = s.rect.left
+
+    def vertical_collision(self):
+        player = self.player.sprite
+        player.add_gravity()
+
+        for s in self.blocks.sprites():
+            if s.rect.colliderect(player.rect):
+                if player.direction.y > 0:
+                    player.rect.bottom = s.rect.top
+                    player.direction.y = 0 # sprijeci slaganje gravitacije
+                elif player.direction.y < 0:
+                    player.rect.top = s.rect.bottom
+                    player.direction.y = 0 # sprijeci lijepljenje za krov
+
     def run(self):
         # crtam platforme
         self.blocks.update(self.world_shift)
         self.blocks.draw(self.display_surface)
+        self.scroll_x()
 
         # crtam igraca
         self.player.update()
+        self.horizontal_collision()
+        self.vertical_collision()
         self.player.draw(self.display_surface)
-        self.scroll_x()
+
